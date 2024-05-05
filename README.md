@@ -13,18 +13,22 @@ The task:
 3. Implement approach in MySQL.
 4. Run basic queries to gather business insights.
 
+## Learning
+1. **Order matters**: To ensure that FK could be correctly established, I had to clearly plan the order in which I created the relevant tables and how to insert the relevant data.
+
 ## Entities
 1. Customer
 2. Address
 3. Loyalty Card
-4. Payments
-5. Orders
+4. Payment
+5. Order
 6. Shipments
 7. Cart
 8. Cart Item
 9. Product
 10. Category
 11. Store
+12. Store Product
 
 ## Data Relationships
 
@@ -44,7 +48,7 @@ The task:
    - Each shipment corresponds to one order.
    - An order can have many shipment details.
 
-5. **Product - Cart**
+5. **Product - Cart (via Cart Item)** 
    - Each product can be added to many carts.
    - Each cart can have many products.
 
@@ -52,19 +56,19 @@ The task:
    - Each payment is made by one customer.
    - A customer can make many payments.
 
-7. **Order - Products (via Cart)**
+7. **Order - Products (via Order Items)** 
    - Each order can contain many products.
    - Products can be added to many orders.
 
-8. **Cart - Order**
-   - Each order is associated with one cart.
-   - Each cart can only be finalized to one order.
+8. **Customer - Cart**
+   - Each cart is associated with one customer.
+   - A customer can have many
 
 9. **Customer - Loyalty Card**
    - Each customer can only have one loyalty card.
    - Each loyalty card belongs to one customer.
 
-10. **Store : Products**
+10. **Store : Products (via Store Products)**
     - Each store can stock many products.
     - Products can be stocked in many stores.
 
@@ -72,23 +76,25 @@ The task:
 
 
   <summary>ERD diagram</summary>
-  <img src="./ERD.png" width="400" height="400">
+  <img src="./ERD.png" width="800" height="400">
 
 
 ### Relationships
 
 - **1:M**
-  - Category : Products
-  - Customer : Orders
-  - Customer : Addresses
-  - Order : Shipments
-  - Customer : Payments
-  - Order : Products
-  - Products : Stores
+   - Product: Categories 
+   - Customer : Orders
+   - Customer : Addresses
+   - Order : Shipments
+   - Customer : Payments
+   - Customer : Cart
 
+   - Order : Products (how does this work)
+   
 - **1:1**
-  - Customer : Loyalty Card
-  - Order : Cart
+   - Customer : Loyalty Card
 
 - **M:M**
   - Product : Cart (via Cart Item)
+  - Order : Products (via Order Items)
+  - Store : Products (via Store Products)
